@@ -10,28 +10,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
-fun isPermissionGranted(context: Context, permission: String) : Boolean {
+fun  isPermissionGranted(context: Context, permission: String) : Boolean {
     return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
 }
-
 fun requestPermission(activity: Activity?, permission: String, requestCode: Int){
     ActivityCompat.requestPermissions(activity!!, arrayOf(permission), requestCode)
 }
 
 class MainActivity : AppCompatActivity() {
-//    private lateinit var btnSend: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-//        btnSend = findViewById(R.id.btnSendId)
-//        btnSend.setOnClickListener {
-//            if(!isPermissionGranted(this, android.Manifest.permission.SEND_SMS)){
-//                requestPermission(this,android.Manifest.permission.SEND_SMS, 42069)
-//            }
-//            else{
-//                sendSms()
-//            }
-//        }
         if(!isPermissionGranted(this, android.Manifest.permission.SEND_SMS)){
             requestPermission(this,android.Manifest.permission.SEND_SMS, 42069)
         }
@@ -60,21 +48,8 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Sending SMS...", Toast.LENGTH_SHORT).show()
         val smsManager = SmsManager.getDefault()
         smsManager.sendTextMessage("199", null, "Bal", null, null)
-//        class timer : CountDownTimer(2000, 1000){
-//            override fun onTick(p0: Long) {
-//
-//            }
-//
-//            override fun onFinish() {
-//                finish()
-//            }
-//
-//        }
-//        var timer1 = timer()
-//        timer1.start()
         finish()
     }
-
 }
 
 
